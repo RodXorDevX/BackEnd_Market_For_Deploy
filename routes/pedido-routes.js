@@ -14,5 +14,6 @@ router.put('/:id/estado', pedidoController.updateEstadoPedido);
 //Actualizar el estado del pedido
 router.put('/actualizar-estado', pedidoController.actualizarEstadoPedido);
 
+router.get('/usuario/:id', pedidoController.getPedidosPorUsuario);
 
 module.exports = router;

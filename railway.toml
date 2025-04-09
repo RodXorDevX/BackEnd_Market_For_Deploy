@@ -1,6 +1,6 @@
 [build]
 # Para proyecto Node.js estándar (sin compilación)
-command = "npm install"
+command = "npm install --omit=dev"
 
 [deploy]
 # Comando para migraciones de base de datos (si aplica)

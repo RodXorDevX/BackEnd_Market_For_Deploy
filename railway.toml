@@ -23,7 +23,7 @@ DATABASE_URL = { required = true }
 PORT = "3000"
 JWT_SECRET = { required = true }
 NODE_ENV = "production"
-CORS_ORIGIN = "https://trends-marketplace.netlify.app",
+CORS_ORIGIN = "https://trends-marketplace.netlify.app"
 ALLOWED_ORIGINS = "https://trends-marketplace.netlify.app,http://localhost:3000"
 
 [healthcheck]

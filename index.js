@@ -16,7 +16,7 @@ const pedidosRoutes = require('./routes/pedido-routes');
 
 // Configuración inicial de Express
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // JWT
 const secretKey = process.env.SECRET_KEY;
@@ -25,8 +25,15 @@ if (!secretKey) {
     process.exit(1); // Detiene la ejecución si no hay clave
 }
 
+// Configuración CORS segura
+const corsOptions = {
+  origin: process.env.CORS_ORIGIN || 'https://trends-marketplace.netlify.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+
 // Middlewares
-app.use(cors()); // Habilita CORS para todas las rutas
+app.use(cors(corsOptions)); // Habilita CORS para todas las rutas
 app.use(express.json()); // Permite el manejo de JSON en las solicitudes
 app.use(logRequest); // Middleware para loguear las solicitudes
 
@@ -52,7 +59,10 @@ pool.query('SELECT NOW()', (err, res) => {
 // Inicio del servidor
 if (process.env.NODE_ENV !== 'test') {
     app.listen(PORT, () => {
-        console.log(`Servidor corriendo en http://localhost:${PORT}`);
+        console.log('🚀 Backend desplegado en Railway');
+        console.log(`🌐 URL pública: ${process.env.PUBLIC_URL}`);
+        console.log(`🔒 Orígenes CORS permitidos: ${corsOptions.origin}`);
+        console.log(`📡 Escuchando en puerto interno: ${PORT}`);
     });
 }
 

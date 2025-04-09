@@ -15,7 +15,7 @@ watchPatterns = [
   "index.js",
   "package.json",
   "package-lock.json"# En la sección [variables]
-  CORS_ORIGIN = "[https://trends-marketplace.netlify.app](https://trends-marketplace.netlify.app)" 
+  CORS_ORIGIN = "[https://trends-marketplace.netlify.app](https://trends-marketplace.netlify.app)", 
   ALLOWED_ORIGINS = "[https://trends-marketplace.netlify.app](https://trends-marketplace.netlify.app),http://localhost:3000"
 ]
 

@@ -62,7 +62,7 @@ if (process.env.NODE_ENV !== 'test') {
         console.log('🚀 Backend desplegado en Railway');
         console.log(`🌐 URL pública: ${process.env.PUBLIC_URL}`);
         console.log(`🔒 Orígenes CORS permitidos: ${corsOptions.origin}`);
-        console.log(`📡 Escuchando en puerto interno: ${PORT}`);
+        console.log(`📡 Escuchando en puerto interno: ${process.env.PUBLIC_URL}`);
     });
 }
 

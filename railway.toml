@@ -14,9 +14,7 @@ watchPatterns = [
   "src/**",
   "index.js",
   "package.json",
-  "package-lock.json"# En la sección [variables]
-  CORS_ORIGIN = "[https://trends-marketplace.netlify.app](https://trends-marketplace.netlify.app)", 
-  ALLOWED_ORIGINS = "[https://trends-marketplace.netlify.app](https://trends-marketplace.netlify.app),http://localhost:3000"
+  "package-lock.json"
 ]
 
 [variables]
@@ -25,6 +23,8 @@ DATABASE_URL = { required = true }
 PORT = "3000"
 JWT_SECRET = { required = true }
 NODE_ENV = "production"
+CORS_ORIGIN = "https://trends-marketplace.netlify.app",
+ALLOWED_ORIGINS = "https://trends-marketplace.netlify.app,http://localhost:3000"
 
 [healthcheck]
 # Configuración opcional de health check

@@ -27,7 +27,7 @@ if (!secretKey) {
 
 // Configuración CORS segura
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN || 'https://trends-marketplace.netlify.app',
+  origin: process.env.CORS_ORIGIN || 'https://marketplace-trends.netlify.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 };

@@ -69,13 +69,13 @@ const getProductosFiltrados = async (filters) => {
 
 // Función para crear un nuevo producto (Kept as is, already uses vendedor_id)
 const createProducto = async (productoData) => {
-    const { titulo, descripcion, precio, categoria_id, size, stock, imagen, vendedor_id } = productoData;
-    // Ensure all required fields are present, especially vendedor_id
+    const { titulo, descripcion, precio, categoria_id, size, stock, imagen, vendedor_id, calificacion } = productoData;
     if (!vendedor_id) throw new Error("vendedor_id es requerido para crear un producto");
 
     const query = format(
-        'INSERT INTO productos (titulo, descripcion, precio, categoria_id, size, stock, imagen, vendedor_id) VALUES (%L, %L, %L, %L, %L, %L, %L, %L) RETURNING *',
-        titulo, descripcion, precio, categoria_id, size, stock, imagen, vendedor_id
+        'INSERT INTO productos (titulo, descripcion, precio, categoria_id, size, stock, imagen, vendedor_id, calificacion) VALUES (%L, %L, %L, %L, %L, %L, %L, %L, %L) RETURNING *',
+        titulo, descripcion, precio, categoria_id, size, stock, imagen, vendedor_id, calificacion || null
+    );
     );
     console.log("Executing SQL (create):", query);
     const result = await pool.query(query);

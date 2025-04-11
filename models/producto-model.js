@@ -97,7 +97,8 @@ const updateProducto = async (id, productoData) => {
         categoria_id, 
         size, 
         stock, 
-        imagen 
+        imagen,
+        calificacion
     } = productoData;
     
     // Construir dinámicamente la consulta SQL para actualizar solo los campos proporcionados
@@ -139,6 +140,11 @@ const updateProducto = async (id, productoData) => {
     if (imagen !== undefined) {
         updateFields.push(`imagen = $${paramIndex++}`);
         queryParams.push(imagen);
+    }
+    
+    if (calificacion !== undefined) {
+        updateFields.push(`calificacion = $${paramIndex++}`);
+        queryParams.push(calificacion);
     }
     
     // Si no hay campos para actualizar, devolver el producto existente

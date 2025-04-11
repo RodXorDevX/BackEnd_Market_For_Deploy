@@ -56,15 +56,15 @@ const getProductosFiltrados = async (req, res) => {
 const createProducto = async (req, res) => {
   try {
       console.log("🟨 Datos recibidos en el backend:", req.body);
-      const { titulo, descripcion, precio, categoria_id, vendedor_id } = req.body;
+      const { titulo, descripcion, precio, categoria_id, vendedor_id, imagen, stock } = req.body;
 
       // Validación de datos obligatorios
-      if (!titulo || !descripcion || !precio || !categoria_id || !vendedor_id) {
+      if (!titulo || !descripcion || !precio || !categoria_id || !vendedor_id || !imagen || !stock) {
           return res.status(400).json({ error: "Faltan datos obligatorios" });
       }
 
       // Crear el producto en la base de datos
-      const productoData = { titulo, descripcion, precio, categoria_id, vendedor_id };
+      const productoData = { titulo, descripcion, precio, categoria_id, vendedor_id, imagen, stock };
       const nuevoProducto = await productoModel.createProducto(productoData);
 
       // Devolver el producto creado con código 201 (Creado)

@@ -57,7 +57,7 @@ app.use((req, res, next) => {
   cors(corsOptions)(req, res, next);
 });
 
-// Middleware adicional para asegurar headers en todas las respuestas
+// Middleware adicional para asegurar headers en todas las respuestas y prevenir redirects
 app.use((req, res, next) => {
   const origin = process.env.CORS_ORIGIN || 'https://marketplace-trends.netlify.app';
 
@@ -67,6 +67,15 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Max-Age', '86400');
 
+  next();
+});
+
+// Prevenir cualquier redirección automática que pueda causar problemas CORS
+app.use((req, res, next) => {
+  // Evitar redirecciones automáticas
+  if (req.url !== '/' && req.url.endsWith('/')) {
+    return res.redirect(301, req.url.slice(0, -1));
+  }
   next();
 });
 app.use(express.json()); // Permite el manejo de JSON en las solicitudes

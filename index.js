@@ -25,21 +25,50 @@ if (!secretKey) {
     process.exit(1); // Detiene la ejecución si no hay clave
 }
 
-// Configuración CORS mejorada
+// Configuración CORS mejorada y más estricta
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN || 'https://marketplace-trends.netlify.app',
+  origin: function (origin, callback) {
+    // Permitir el origen sin environment variables o el configurado
+    const allowedOrigins = [
+      'https://marketplace-trends.netlify.app',
+      'https://trends-marketplace.netlify.app'
+    ];
+
+    // Permitir peticiones sin origin (móviles, Postman) o los permitidos
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('No permitido por CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin', 'Cache-Control'],
   credentials: true,
   preflightContinue: false,
-  optionsSuccessStatus: 204
+  optionsSuccessStatus: 204,
+  maxAge: 86400 // 24 horas de cache para preflight
 };
 
-// Middleware explícito para OPTIONS
+// Middleware explícito para OPTIONS ANTES de otras rutas
 app.options('*', cors(corsOptions));
 
-// Middlewares
-app.use(cors(corsOptions)); // Habilita CORS para todas las rutas
+// Middleware para CORS con logging
+app.use((req, res, next) => {
+  cors(corsOptions)(req, res, next);
+});
+
+// Middleware adicional para asegurar headers en todas las respuestas
+app.use((req, res, next) => {
+  const origin = process.env.CORS_ORIGIN || 'https://marketplace-trends.netlify.app';
+
+  res.header('Access-Control-Allow-Origin', origin);
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept, Origin, Cache-Control');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Max-Age', '86400');
+
+  next();
+});
 app.use(express.json()); // Permite el manejo de JSON en las solicitudes
 app.use(logRequest); // Middleware para loguear las solicitudes
 

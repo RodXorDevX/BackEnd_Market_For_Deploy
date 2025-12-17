@@ -8,16 +8,22 @@
   ],
   "routes": [
     {
+      "src": "/health",
+      "dest": "/index.js"
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.js"
     }
   ],
   "env": {
-    "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "PORT": "3000"
   },
   "functions": {
     "index.js": {
-      "runtime": "nodejs18.x"
+      "runtime": "nodejs18.x",
+      "maxDuration": 10
     }
   },
   "headers": [
@@ -30,13 +36,27 @@
         },
         {
           "key": "Access-Control-Allow-Methods",
-          "value": "GET, POST, PUT, DELETE, OPTIONS"
+          "value": "GET, POST, PUT, DELETE, OPTIONS, PATCH"
         },
         {
           "key": "Access-Control-Allow-Headers",
-          "value": "Content-Type, Authorization"
+          "value": "Content-Type, Authorization, X-Requested-With, Accept, Origin"
+        },
+        {
+          "key": "Access-Control-Allow-Credentials",
+          "value": "true"
+        },
+        {
+          "key": "Access-Control-Max-Age",
+          "value": "86400"
         }
       ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/health",
+      "destination": "/health"
     }
   ]
 }

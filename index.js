@@ -45,6 +45,30 @@ app.use('/categorias', categoriasRoutes);
 app.use('/tipo-usuario', tipoUsuarioRoutes);
 app.use('/pedidos', pedidosRoutes);
 
+// Health check endpoint
+app.get('/health', (req, res) => {
+    const pool = require('./config/db-config');
+
+    pool.query('SELECT NOW()', (err, dbResult) => {
+        if (err) {
+            res.status(500).json({
+                status: 'unhealthy',
+                timestamp: new Date().toISOString(),
+                database: 'disconnected',
+                error: err.message
+            });
+        } else {
+            res.status(200).json({
+                status: 'healthy',
+                timestamp: new Date().toISOString(),
+                database: 'connected',
+                db_time: dbResult.rows[0].now,
+                uptime: process.uptime()
+            });
+        }
+    });
+});
+
 // Test de conexión a base de datos
 const pool = require('./config/db-config');
 

@@ -80,6 +80,16 @@ app.use('/categorias', categoriasRoutes);
 app.use('/tipo-usuario', tipoUsuarioRoutes);
 app.use('/pedidos', pedidosRoutes);
 
+// Simple test endpoint for frontend debugging
+app.get('/test', (req, res) => {
+    res.status(200).json({
+        message: 'Backend is working!',
+        timestamp: new Date().toISOString(),
+        origin: req.headers.origin,
+        cors: 'enabled'
+    });
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
     const pool = require('./config/db-config');

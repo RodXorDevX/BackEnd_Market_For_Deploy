@@ -7,6 +7,7 @@ node_modules/
 .env.development
 .env.test
 .env.production
+.env.*.local
 
 # Sensitive files
 *.key
@@ -16,6 +17,17 @@ node_modules/
 *.crt
 *.cert
 config/secrets.js
+
+# Database credentials and configuration
+**/testdb.js
+**/*config*.js
+**/config/db.js
+
+# Demo scripts (may contain sensitive data)
+script-*.cjs
+**/demo*.js
+**/seed*.js
+**/*script*.js
 
 # Logs
 logs

@@ -14,11 +14,8 @@ app.use(express.json()); // Permite el manejo de JSON en las solicitudes
 
 // Configuración de la conexión a PostgreSQL
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'db_marketplace_2',
-    password: 'Pg123456',
-    port: 5432,
+    connectionString: process.env.DATABASE_URL || 'postgresql://postgres:your_password@localhost:5432/db_marketplace_2',
+    ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false
 });
 
 // Middleware para loguear las solicitudes

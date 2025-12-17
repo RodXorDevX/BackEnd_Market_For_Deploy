@@ -25,12 +25,18 @@ if (!secretKey) {
     process.exit(1); // Detiene la ejecución si no hay clave
 }
 
-// Configuración CORS segura
+// Configuración CORS mejorada
 const corsOptions = {
   origin: process.env.CORS_ORIGIN || 'https://marketplace-trends.netlify.app',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
+  credentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 };
+
+// Middleware explícito para OPTIONS
+app.options('*', cors(corsOptions));
 
 // Middlewares
 app.use(cors(corsOptions)); // Habilita CORS para todas las rutas

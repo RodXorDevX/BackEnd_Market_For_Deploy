@@ -43,7 +43,7 @@ BackEnd_Market_For_Deploy/
 
 1. **Clonar el repositorio:**
    ```bash
-   git clone https://github.com/RodrigoCQ4/BackEnd_Market_For_Deploy.git
+   git clone https://github.com/RodXorDevX/BackEnd_Market_For_Deploy.git
    cd BackEnd_Market_For_Deploy
    ```
 
@@ -53,10 +53,7 @@ BackEnd_Market_For_Deploy/
    ```
 
 3. **Configurar variables de entorno:**
-   ```bash
-   cp .env.example .env
-   ```
-   Luego, editar el archivo `.env` con tus credenciales:
+   Crear un archivo `.env` con tus credenciales:
    ```env
    PORT=3000
    NODE_ENV=development

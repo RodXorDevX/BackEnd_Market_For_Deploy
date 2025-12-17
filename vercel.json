@@ -58,9 +58,5 @@
       "source": "/health",
       "destination": "/health"
     }
-  ],
-  "bypass": {
-    "src": "/(.*)",
-    "dest": "/index.js"
-  }
+  ]
 }

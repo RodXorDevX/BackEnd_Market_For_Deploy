@@ -150,7 +150,8 @@ Para propósitos de desarrollo y demostración, se incluyen scripts para crear d
 ### Producción (Vercel)
 - Variable `NODE_ENV=production`
 - Base de datos PostgreSQL remota (Supabase)
-- URL pública configurada
+- 🌐 **URL en producción:** [https://back-end-market-for-deploy.vercel.app](https://back-end-market-for-deploy.vercel.app)
+- Despliegue automático en cada push a main
 
 ### Desarrollo Local
 - Variable `NODE_ENV=development`
